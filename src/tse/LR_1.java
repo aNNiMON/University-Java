@@ -1,7 +1,6 @@
 package tse;
 
-import tse.lr1.ImageScaleDown;
-import tse.lr1.Triangle;
+import tse.lr1.*;
 
 /**
  * @author aNNiMON
@@ -18,6 +17,7 @@ public class LR_1 implements ILabRab {
     public void execute(int index) {
         switch(index) {
             case 0:
+                Calculator.main();
                 break;
             case 1:
                 Triangle.main();

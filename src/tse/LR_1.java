@@ -1,5 +1,7 @@
 package tse;
 
+import tse.lr1.Triangle;
+
 /**
  * @author aNNiMON
  */
@@ -13,7 +15,15 @@ public class LR_1 implements ILabRab {
 
     @Override
     public void execute(int index) {
-        System.out.println(TITLES[index]);
+        switch(index) {
+            case 0:
+                break;
+            case 1:
+                Triangle.main();
+                break;
+            case 2:
+                break;
+        }
     }
 
     @Override

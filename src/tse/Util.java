@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
+import java.util.Scanner;
 
 /**
  *
@@ -38,5 +39,13 @@ public class Util {
             }
         }
         return text.toString();
+    }
+    
+    public static double readDouble(Scanner sc) {
+        while (!sc.hasNextDouble()) {
+            System.out.println("Ошибка! Неверный формат!");
+            sc.next();
+        }
+        return sc.nextDouble();
     }
 }

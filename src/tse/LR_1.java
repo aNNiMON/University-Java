@@ -1,5 +1,6 @@
 package tse;
 
+import tse.lr1.ImageScaleDown;
 import tse.lr1.Triangle;
 
 /**
@@ -22,6 +23,7 @@ public class LR_1 implements ILabRab {
                 Triangle.main();
                 break;
             case 2:
+                ImageScaleDown.main();
                 break;
         }
     }

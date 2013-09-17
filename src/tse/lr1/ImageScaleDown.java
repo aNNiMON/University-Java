@@ -35,7 +35,7 @@ public class ImageScaleDown extends JFrame {
         panel.setLayout(new BorderLayout());
         panel.setBorder(new EmptyBorder(10, 10, 10, 10));
         
-        BufferedImage source = (BufferedImage) Util.readImageRes("lena.png");
+        BufferedImage source = (BufferedImage) Util.readImageRes("lena.bmp");
         panel.add(new JLabel(new ImageIcon(source)), BorderLayout.WEST);
         
         BufferedImage dest = scaleDown(source);
@@ -70,7 +70,7 @@ public class ImageScaleDown extends JFrame {
                 pixel += src[ (y*2+1) * w + (x*2+1) ] & 0xFF;
                 pixel = pixel / 4;
                 
-                dest[y * newWidth + x] = 0xFF000000 | (pixel << 16) | (pixel << 8) | pixel;
+                dest[y * newWidth + x] = 0xFF000000 | (pixel << 16) | (pixel << 8) | (pixel);
             }
         }
         return dest;

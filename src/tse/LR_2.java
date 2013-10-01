@@ -1,5 +1,8 @@
 package tse;
 
+import tse.lr2.CompareArrays1D;
+import tse.lr2.CompareArrays2D;
+
 /**
  * @author aNNiMON
  */
@@ -17,10 +20,10 @@ public class LR_2 implements ILabRab {
     public void execute(int index) {
         switch(index) {
             case 0:
-                
+                CompareArrays1D.main();
                 break;
             case 1:
-                
+                CompareArrays2D.main();
                 break;
             case 2:
                 
@@ -41,7 +44,7 @@ public class LR_2 implements ILabRab {
 
     @Override
     public String getDescription(int index) {
-        return Util.readDescription(1, index);
+        return Util.readDescription(2, index);
     }
     
 }

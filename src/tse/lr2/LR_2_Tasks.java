@@ -4,7 +4,9 @@ import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -62,6 +64,24 @@ public class LR_2_Tasks {
         printList(copy);
     }
     
+    public void task5() {
+        makeObjects();
+        HashMap<Ellipse, String> map = new HashMap<>();
+        map.put(ellipse1, "Эллипс Первый");
+        map.put(ellipse2, "Эллипс Иоанн Второй");
+        map.put(ellipse3, "Эллипс Третий");
+        map.put(circle1, "Круг один");
+        map.put(circle2, "Круг 2. Атака клонов");
+        printMap(map);
+        
+        System.out.println("\nВыводим ellipse1");
+        printMapEntry(ellipse1, map.get(ellipse1));
+        
+        System.out.println("\nДобавляем другой ellipse1 и выводим");
+        map.put(ellipse1, "Снова Эллипс Первый");
+        printMapEntry(ellipse1, map.get(ellipse1));
+    }
+    
     private void makeObjects() {
         ellipse1 = new Ellipse(
                 new Point(2, 2), new Point(8, 2),
@@ -84,6 +104,16 @@ public class LR_2_Tasks {
             Ellipse ellipse = list.get(i);
             System.out.println( String.format("%2d. %f", i + 1, ellipse.getSquare()) );
         }
+    }
+    
+    private void printMap(Map<Ellipse, String> map) {
+        for (Map.Entry<Ellipse, String> entry : map.entrySet()) {
+            printMapEntry(entry.getKey(), entry.getValue());
+        }
+    }
+    
+    private void printMapEntry(Ellipse key, String value) {
+        System.out.println( String.format("%f\t- %s", key.getSquare(), value) );
     }
     
     private void userSort(List<Ellipse> list, Comparator<Ellipse> comparator) {

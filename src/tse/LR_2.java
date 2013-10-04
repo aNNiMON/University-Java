@@ -14,7 +14,7 @@ public class LR_2 implements ILabRab {
         "Двумерный массив строк",
         "Эллипсы и круги. Массив",
         "Эллипсы и круги 2. Сортировка списка",
-        "5"
+        "Эллипсы и круги 3. HashMap"
     };
 
     @Override
@@ -33,7 +33,7 @@ public class LR_2 implements ILabRab {
                 LR_2_Tasks.getInstance().task4();
                 break;
             case 4:
-                
+                LR_2_Tasks.getInstance().task5();
                 break;
         }
     }

@@ -27,6 +27,10 @@ public class Ellipse {
         points = Arrays.copyOf(ellipse.points, POINTS);
     }
     
+    public static Point getCenterPoint(Ellipse ellipse) {
+        return ellipse.getCenterPoint();
+    }
+    
     public Point getCenterPoint() {
         int cx = (points[1].x - points[0].x) / 2  + points[0].x;
         int cy = (points[2].y - points[0].y) / 2 + points[0].y;
@@ -34,11 +38,19 @@ public class Ellipse {
         return center;
     }
     
+    public static double getSquare(Ellipse ellipse) {
+        return ellipse.getSquare();
+    }
+    
     public double getSquare() {
         Point center = getCenterPoint();
         double hor = center.x - points[0].x;
         double ver = center.y - points[0].y;
         return Math.PI * hor * ver;
+    }
+    
+    public static double getDistanceOfCentres(Ellipse ellipse1, Ellipse ellipse2) {
+        return ellipse1.getDistanceOfCentres(ellipse2);
     }
     
     public double getDistanceOfCentres(Ellipse ellipse) {

@@ -1,6 +1,10 @@
 package tse.lr2;
 
 import java.awt.Point;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 /**
  *
@@ -39,6 +43,25 @@ public class LR_2_Tasks {
         }
     }
     
+    public void task4() {
+        makeObjects();
+        ArrayList<Ellipse> ellipses = new ArrayList<>();
+        ellipses.add(ellipse1);
+        ellipses.add(ellipse2);
+        ellipses.add(ellipse3);
+        ellipses.add(circle1);
+        ellipses.add(circle2);
+        printList(ellipses);
+        System.out.println("Collections.sort");
+        ArrayList<Ellipse> copy = (ArrayList<Ellipse>) ellipses.clone();
+        Collections.sort(copy, squareComparator);
+        printList(copy);
+        System.out.println("user sort");
+        copy = (ArrayList<Ellipse>) ellipses.clone();
+        userSort(copy, squareComparator);
+        printList(copy);
+    }
+    
     private void makeObjects() {
         ellipse1 = new Ellipse(
                 new Point(2, 2), new Point(8, 2),
@@ -55,4 +78,35 @@ public class LR_2_Tasks {
         
         point1 = new Point(3, 3);
     }
+    
+    private void printList(List<Ellipse> list) {
+        for (int i = 0; i < list.size(); i++) {
+            Ellipse ellipse = list.get(i);
+            System.out.println( String.format("%2d. %f", i + 1, ellipse.getSquare()) );
+        }
+    }
+    
+    private void userSort(List<Ellipse> list, Comparator<Ellipse> comparator) {
+        final int size = list.size();
+        for (int i = 0; i < size - 1; i++) {
+            int min = i;
+            for (int j = i + 1; j < size; j++) {
+                if (comparator.compare(list.get(j), list.get(min)) < 0) {
+                    min = j;
+                }
+            }
+            Ellipse temp = list.get(i);
+            list.set(i, list.get(min));
+            list.set(min, temp);
+        }
+    }
+    
+    private final Comparator<Ellipse> squareComparator = new Comparator<Ellipse>() {
+
+        @Override
+        public int compare(Ellipse e1, Ellipse e2) {
+            return Double.compare(e1.getSquare(), e2.getSquare());
+        }
+    };
+
 }

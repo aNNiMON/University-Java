@@ -13,7 +13,7 @@ public class LR_2 implements ILabRab {
         "Копирование и сравнение массивов",
         "Двумерный массив строк",
         "Эллипсы и круги. Массив",
-        "4",
+        "Эллипсы и круги 2. Сортировка списка",
         "5"
     };
 
@@ -30,7 +30,7 @@ public class LR_2 implements ILabRab {
                 LR_2_Tasks.getInstance().task3();
                 break;
             case 3:
-                
+                LR_2_Tasks.getInstance().task4();
                 break;
             case 4:
                 

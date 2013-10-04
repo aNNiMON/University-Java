@@ -9,23 +9,24 @@ import java.util.Arrays;
 public class CompareArrays2D {
 
     public static void main() {
-        String[][] a = { {"1","2","3"}, {"4", "5", "6"}, {"7", "8", "9"}};
+        String[][] a = { {"1","2","3"}, {"4", "5", "6"}, {"7", "8", "9"} };
         String[][] b1 = a;
         String[][] b2 = a.clone();
         String[][] b3 = Arrays.copyOf(a, a.length);
-        String[][] b4 = { {"1","2","3"}, {"4", "5", "6"}, {"7", "8", "9"}};
+        String[][] b4 = { {"1","2","3"}, {"4", "5", "6"}, {"7", "8", "9"} };
         
+        System.out.print("b\t\t\tb==a\tb.equals(a)\tArrays.equals(a,b)  deepEquals\t\tb[0]==a[0]");
         printRow("b=a\t\t\t", getValues(a, b1));
         printRow("b=a.clone()\t\t", getValues(a, b2));
         printRow("b=Arrays.copyOf(a)\t", getValues(a, b3));
-        printRow("b4 = {\"1\",\"2\",\"3\"}, {\"4\",\"5...", getValues(a, b4));
+        printRow("b4 = {\"1\"...}, {\"4\"...\t", getValues(a, b4));
     }
 
     private static void printRow(String col1, boolean[] values) {
         System.out.println();
-        System.out.print(col1 + "\t");
+        System.out.print(col1);
         for (boolean val : values) {
-            System.out.print(val + "\t");
+            System.out.print(val + "\t\t");
         }
     }
 

@@ -7,6 +7,14 @@ import java.awt.Point;
  * @author aNNiMON
  */
 public class Circle extends Ellipse {
+    
+    public Circle() {
+        super();
+    }
+    
+    public Circle(Point p1, Point p2, Point p3, Point p4) {
+        super(p1, p2, p3, p4);
+    }
 
     public boolean isConsist(Point point) {
         Point center = getCenterPoint();
@@ -20,7 +28,7 @@ public class Circle extends Ellipse {
     
     @Override
     public String toString() {
-        return "This is circle!\n" + super.toString();
+        return "Круг - твой друг!";
     }
     
 }

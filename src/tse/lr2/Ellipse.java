@@ -78,13 +78,14 @@ public class Ellipse {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
+        /*StringBuilder sb = new StringBuilder();
         for (int i = 0; i < POINTS; i++) {
             sb.append(points[i].toString()).append('\t');
         }
         sb.append("\nSquare: ").append(getSquare());
         sb.append("\nCenter: ").append(getCenterPoint().toString());
-        return sb.toString();
+        return sb.toString();*/
+        return "Я - Эллипс";
     }
     
 }

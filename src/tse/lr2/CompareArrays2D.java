@@ -15,7 +15,7 @@ public class CompareArrays2D {
         String[][] b3 = Arrays.copyOf(a, a.length);
         String[][] b4 = { {"1","2","3"}, {"4", "5", "6"}, {"7", "8", "9"} };
         
-        System.out.print("b\t\t\tb==a\tb.equals(a)\tArrays.equals(a,b)  deepEquals\t\tb[0]==a[0]");
+        System.out.print("\nb\t\t\tb==a\tb.equals(a)\tArrays.equals(a,b)  deepEquals\t\tb[0]==a[0]");
         printRow("b=a\t\t\t", getValues(a, b1));
         printRow("b=a.clone()\t\t", getValues(a, b2));
         printRow("b=Arrays.copyOf(a)\t", getValues(a, b3));

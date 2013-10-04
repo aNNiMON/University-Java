@@ -2,6 +2,7 @@ package tse;
 
 import tse.lr2.CompareArrays1D;
 import tse.lr2.CompareArrays2D;
+import tse.lr2.LR_2_Tasks;
 
 /**
  * @author aNNiMON
@@ -11,7 +12,7 @@ public class LR_2 implements ILabRab {
     private static final String[] TITLES = {
         "Копирование и сравнение массивов",
         "Двумерный массив строк",
-        "3",
+        "Эллипсы и круги. Массив",
         "4",
         "5"
     };
@@ -26,7 +27,7 @@ public class LR_2 implements ILabRab {
                 CompareArrays2D.main();
                 break;
             case 2:
-                
+                LR_2_Tasks.getInstance().task3();
                 break;
             case 3:
                 

@@ -12,9 +12,11 @@ public class Circle extends Ellipse {
         super();
     }
     
-    public Circle(Point p1, Point p2) {
-        super(new Point(p1.x, p1.y), new Point(p2.x, p1.y),
-              new Point(p1.x, p2.y), new Point(p2.x, p2.y));
+    public Circle(Point center, int radius) {
+        super(new Point(center.x - radius, center.y - radius),
+              new Point(center.x + radius, center.y - radius),
+              new Point(center.x - radius, center.y + radius),
+              new Point(center.x + radius, center.y + radius));
     }
 
     public boolean isConsist(Point point) {

@@ -93,8 +93,8 @@ public class LR_2_Tasks {
         );
         ellipse3 = new Ellipse(ellipse1);
         
-        circle1 = new Circle( new Point(1, 1),  new Point(6, 6) );
-        circle2 = new Circle( new Point(5, 4),  new Point(15, 14) );
+        circle1 = new Circle( new Point(3, 3),  6 );
+        circle2 = new Circle( new Point(5, 4),  2 );
         
         point1 = new Point(3, 3);
     }

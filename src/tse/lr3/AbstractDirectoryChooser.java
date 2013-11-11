@@ -47,7 +47,14 @@ public abstract class AbstractDirectoryChooser extends JDialog implements Action
     @Override
     public void actionPerformed(ActionEvent e) {
         if (chooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
-            directorySelected(chooser.getSelectedFile());
+            new Thread(new Runnable() {
+
+                @Override
+                public void run() {
+                    directorySelected(chooser.getSelectedFile());
+                    System.out.println("Готово!");
+                }
+            }).start();
         } else {
             System.out.println("Ничего не выбрано");
         }

@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
 import java.util.zip.ZipOutputStream;
 
 /**
@@ -33,8 +34,11 @@ public class DirZip extends AbstractDirectoryChooser {
     @Override
     protected void directorySelected(File directory) {
         try {
-            if (EXTRACT) {
-
+            if (!EXTRACT) {
+                FileInputStream fis = new FileInputStream(zipFile);
+                ZipInputStream zis = new ZipInputStream(fis);
+                unzipDirectory(zis, directory);
+                zis.close();
             } else {
                 // Запаковываем
                 FileOutputStream fos = new FileOutputStream(zipFile);
@@ -45,6 +49,33 @@ public class DirZip extends AbstractDirectoryChooser {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
+    }
+    
+    private void unzipDirectory(ZipInputStream zis, File directory) throws IOException {
+        ZipEntry entry;
+        while ( (entry = zis.getNextEntry()) != null) {
+            if (entry.isDirectory()) {
+                // Создаём папку
+                new File(directory, entry.getName()).mkdirs();
+            } else {
+                String filename = entry.getName();
+                int separatorIndex = filename.lastIndexOf(File.separator);
+                if (separatorIndex != -1) {
+                    new File(directory, filename.substring(0, separatorIndex)).mkdirs();
+                    filename = filename.substring(separatorIndex);
+                }
+                // Распаковываем файл
+                byte[] buffer = new byte[1024];
+                FileOutputStream fos = new FileOutputStream(new File(directory, filename));
+                int length;
+                while ( (length = zis.read(buffer)) > 0 ) {
+                    fos.write(buffer, 0, length);
+                }
+                fos.flush();
+                fos.close();
+            }
+        }
+        zis.closeEntry();
     }
     
     private void zipDirectory(ZipOutputStream zos, String sourceDir, File fileSource) throws IOException {

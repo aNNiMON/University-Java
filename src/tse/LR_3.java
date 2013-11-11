@@ -22,6 +22,7 @@ public class LR_3 implements ILabRab {
                 LR_3_Tasks.getInstance().task1();
                 break;
             case 1:
+                LR_3_Tasks.getInstance().task2();
                 break;
             case 2:
                 break;

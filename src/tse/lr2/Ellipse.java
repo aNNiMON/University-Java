@@ -29,6 +29,14 @@ public class Ellipse implements Serializable {
         points = Arrays.copyOf(ellipse.points, POINTS);
     }
     
+    public Point[] getPoints() {
+        return points;
+    }
+    
+    public void setPoint(int index, Point point) {
+        points[index] = point;
+    }
+    
     public static Point getCenterPoint(Ellipse ellipse) {
         return ellipse.getCenterPoint();
     }

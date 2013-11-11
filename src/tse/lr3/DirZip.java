@@ -34,7 +34,7 @@ public class DirZip extends AbstractDirectoryChooser {
     @Override
     protected void directorySelected(File directory) {
         try {
-            if (!EXTRACT) {
+            if (EXTRACT) {
                 FileInputStream fis = new FileInputStream(zipFile);
                 ZipInputStream zis = new ZipInputStream(fis);
                 unzipDirectory(zis, directory);
@@ -54,19 +54,19 @@ public class DirZip extends AbstractDirectoryChooser {
     private void unzipDirectory(ZipInputStream zis, File directory) throws IOException {
         ZipEntry entry;
         while ( (entry = zis.getNextEntry()) != null) {
+            final String name = entry.getName();
             if (entry.isDirectory()) {
                 // Создаём папку
-                new File(directory, entry.getName()).mkdirs();
+                new File(directory, name).mkdirs();
             } else {
-                String filename = entry.getName();
-                int separatorIndex = filename.lastIndexOf(File.separator);
+                int separatorIndex = name.lastIndexOf(File.separator);
                 if (separatorIndex != -1) {
-                    new File(directory, filename.substring(0, separatorIndex)).mkdirs();
-                    filename = filename.substring(separatorIndex);
+                    // Создаём папки на пути к файлу
+                    new File(directory, name.substring(0, separatorIndex)).mkdirs();
                 }
                 // Распаковываем файл
                 byte[] buffer = new byte[1024];
-                FileOutputStream fos = new FileOutputStream(new File(directory, filename));
+                FileOutputStream fos = new FileOutputStream(new File(directory, name));
                 int length;
                 while ( (length = zis.read(buffer)) > 0 ) {
                     fos.write(buffer, 0, length);

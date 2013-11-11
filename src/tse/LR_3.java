@@ -1,5 +1,7 @@
 package tse;
 
+import tse.lr3.LR_3_Tasks;
+
 /**
  * @author aNNiMON
  */
@@ -17,6 +19,7 @@ public class LR_3 implements ILabRab {
     public void execute(int index) {
         switch(index) {
             case 0:
+                LR_3_Tasks.getInstance().task1();
                 break;
             case 1:
                 break;

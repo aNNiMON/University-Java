@@ -1,14 +1,16 @@
 package tse.lr2;
 
 import java.awt.Point;
+import java.io.Serializable;
 import java.util.Arrays;
 
 /**
  *
  * @author aNNiMON
  */
-public class Ellipse {
+public class Ellipse implements Serializable {
     
+    private static final long serialVersionUID = 1L;
     private static final int POINTS = 4;
     
     protected final Point[] points;
@@ -78,14 +80,14 @@ public class Ellipse {
 
     @Override
     public String toString() {
-        /*StringBuilder sb = new StringBuilder();
+        StringBuilder sb = new StringBuilder();
         for (int i = 0; i < POINTS; i++) {
             sb.append(points[i].toString()).append('\t');
         }
         sb.append("\nSquare: ").append(getSquare());
         sb.append("\nCenter: ").append(getCenterPoint().toString());
-        return sb.toString();*/
-        return "Я - Эллипс";
+        return sb.toString();
+        // return "Я - Эллипс";
     }
     
 }

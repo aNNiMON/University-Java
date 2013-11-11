@@ -1,12 +1,15 @@
 package tse.lr2;
 
 import java.awt.Point;
+import java.io.Serializable;
 
 /**
  *
  * @author aNNiMON
  */
-public class Circle extends Ellipse {
+public class Circle extends Ellipse implements Serializable {
+    
+    private static final long serialVersionUID = 1L;
     
     public Circle() {
         super();

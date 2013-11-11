@@ -1,6 +1,7 @@
 package tse;
 
 import tse.lr3.DirCopy;
+import tse.lr3.DirFindText;
 import tse.lr3.LR_3_Tasks;
 
 /**
@@ -29,6 +30,7 @@ public class LR_3 implements ILabRab {
                 DirCopy.main();
                 break;
             case 3:
+                DirFindText.main();
                 break;
             case 4:
                 break;

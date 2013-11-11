@@ -1,5 +1,6 @@
 package tse;
 
+import tse.lr3.DirCopy;
 import tse.lr3.LR_3_Tasks;
 
 /**
@@ -25,6 +26,7 @@ public class LR_3 implements ILabRab {
                 LR_3_Tasks.getInstance().task2();
                 break;
             case 2:
+                DirCopy.main();
                 break;
             case 3:
                 break;

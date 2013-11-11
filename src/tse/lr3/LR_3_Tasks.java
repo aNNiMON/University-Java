@@ -83,10 +83,6 @@ public class LR_3_Tasks {
         }
     }
     
-    public void task5() {
-        makeObjects();
-    }
-    
     private void makeObjects() {
         ellipse1 = new Ellipse(
                 new Point(2, 2), new Point(8, 2),

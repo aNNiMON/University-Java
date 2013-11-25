@@ -85,6 +85,10 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="eventName">
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_VariableLocal" type="java.lang.Boolean" value="false"/>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="2"/>
+      </AuxValues>
     </Component>
     <Component class="javax.swing.JLabel" name="descriptionLabel">
       <Properties>
@@ -103,6 +107,10 @@
             <Property name="columns" type="int" value="20"/>
             <Property name="rows" type="int" value="5"/>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableLocal" type="java.lang.Boolean" value="false"/>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="2"/>
+          </AuxValues>
         </Component>
       </SubComponents>
     </Container>
@@ -117,26 +125,43 @@
           <SpinnerModel initial="now" stepSize="2" type="date"/>
         </Property>
       </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_VariableLocal" type="java.lang.Boolean" value="false"/>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="2"/>
+      </AuxValues>
     </Component>
     <Component class="javax.swing.JCheckBox" name="importantCheckBox">
       <Properties>
         <Property name="text" type="java.lang.String" value="&#x412;&#x430;&#x436;&#x43d;&#x43e;&#x435;"/>
       </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_VariableLocal" type="java.lang.Boolean" value="false"/>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="2"/>
+      </AuxValues>
     </Component>
     <Component class="javax.swing.JButton" name="applyButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="&#x41f;&#x440;&#x438;&#x43c;&#x435;&#x43d;&#x438;&#x442;&#x44c;"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="applyButtonActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="prevButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="&lt;&lt;"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="prevButtonActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="nextButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="&gt;&gt;"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="nextButtonActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

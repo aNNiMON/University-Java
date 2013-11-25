@@ -54,6 +54,14 @@ public class LoginPanel extends JPanel {
 
         loginButton = new JButton();
         loginButton.setText("Войти");
+        loginButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+                if (state == STATE_LOGIN) {
+                    checkAuth();
+                }
+            }
+        });
         add(loginButton, new AbsoluteConstraints(112, 129, 125, -1));
 
         signupButton = new JButton();
@@ -108,8 +116,13 @@ public class LoginPanel extends JPanel {
     }
     
     private boolean checkSignUpCredentials() {
-        if (loginTextField.getText().isEmpty()) {
+        String login = loginTextField.getText();
+        if (login.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Не введён логин", "Ошибка", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        if (AccountManager.getInstance().isAccountExists(login)) {
+            JOptionPane.showMessageDialog(this, "Пользователь с таким именем уже существует", "Ошибка", JOptionPane.ERROR_MESSAGE);
             return false;
         }
         String pass1 = String.valueOf( passwordTextField.getPassword() );
@@ -126,7 +139,41 @@ public class LoginPanel extends JPanel {
             JOptionPane.showMessageDialog(this, "Слишком короткий пароль", "Ошибка", JOptionPane.ERROR_MESSAGE);
             return false;
         }
+        
+        // Всё отлично, регистрируем.
+        registerNewAccount(login, pass1);
         JOptionPane.showMessageDialog(this, "Регистрация завершена");
         return true;
+    }
+    
+    private void registerNewAccount(String user, String pass) {
+        String md5hash = Utils.md5(pass);
+        AccountManager.getInstance().createNewAccount(user, md5hash);
+    }
+    
+    private void checkAuth() {
+        String login = loginTextField.getText();
+        if (login.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Не введён логин", "Ошибка", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        String pass = String.valueOf( passwordTextField.getPassword() );
+        if (pass.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Не введён пароль", "Ошибка", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        String md5hash = Utils.md5(pass);
+        switch(AccountManager.getInstance().checkAuth(login, md5hash)) {
+            case AccountManager.STATE_ACCOUNT_NOT_EXISTS:
+                JOptionPane.showMessageDialog(this, "Пользователя с таким именем не существует", "Ошибка", JOptionPane.ERROR_MESSAGE);
+                break;
+            case AccountManager.STATE_PASSWORD_INCORRECT:
+                JOptionPane.showMessageDialog(this, "Неправильный пароль", "Ошибка", JOptionPane.ERROR_MESSAGE);
+                break;
+            case AccountManager.STATE_AUTH_SUCCESSFULL:
+                JOptionPane.showMessageDialog(this, "Авторизация успешна!");
+                break;
+        }
     }
 }

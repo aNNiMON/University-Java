@@ -1,5 +1,6 @@
 package tse;
 
+import tse.lr4.DailyPad;
 import tse.lr4.LoginWindow;
 
 
@@ -20,7 +21,7 @@ public class LR_4 implements ILabRab {
                 new LoginWindow().setVisible(true);
                 break;
             case 1:
-                
+                new DailyPad().setVisible(true);
                 break;
         }
     }

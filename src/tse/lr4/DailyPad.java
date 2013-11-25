@@ -45,7 +45,7 @@ public class DailyPad extends JFrame {
         fileMenu.add(new JMenuItem("Open"));
         JMenuItem saveMenuItem = new JMenuItem("Save");
         saveMenuItem.setMnemonic(KeyEvent.VK_S);
-        saveMenuItem.addActionListener(openActionListener);
+        saveMenuItem.addActionListener(saveActionListener);
         fileMenu.add(saveMenuItem);
         fileMenu.add(new JMenuItem("Save As"));
         JMenuItem exitMenuItem = new JMenuItem("Exit");
@@ -66,9 +66,9 @@ public class DailyPad extends JFrame {
         JButton newButton = new JButton(UIManager.getIcon("Tree.collapsedIcon"));
         newButton.addActionListener(newActionListener);
         toolbar.add(newButton);
-        JButton openButton = new JButton(UIManager.getIcon("Tree.openIcon"));
-        openButton.addActionListener(openActionListener);
-        toolbar.add(openButton);
+        JButton saveButton = new JButton(UIManager.getIcon("Tree.openIcon"));
+        saveButton.addActionListener(saveActionListener);
+        toolbar.add(saveButton);
         JButton exitButton = new JButton(UIManager.getIcon("FileChooser.upFolderIcon"));
         exitButton.addActionListener(exitActionListener);
         toolbar.add(exitButton);
@@ -78,12 +78,14 @@ public class DailyPad extends JFrame {
     private final ActionListener newActionListener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
+            panel.onNewMenuItemSelected();
         }
     };
     
-    private final ActionListener openActionListener = new ActionListener() {
+    private final ActionListener saveActionListener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
+            panel.onSaveMenuItemSelected();
         }
     };
     

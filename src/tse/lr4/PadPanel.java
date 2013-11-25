@@ -12,6 +12,7 @@ import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSpinner;
@@ -29,8 +30,9 @@ public class PadPanel extends JPanel {
     private int padIndex;
     
     public PadPanel() {
-        padIndex = 0;
         initComponents();
+        padIndex = -1;
+        selectNextNotePad();
     }
 
     @SuppressWarnings("unchecked")
@@ -138,20 +140,42 @@ public class PadPanel extends JPanel {
     }//GEN-END:initComponents
 
     private void applyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_applyButtonActionPerformed
-        // TODO add your handling code here:
-        
+        String name = eventName.getText();
+        String description = descriptionTextArea.getText();
+        Date date = (Date) dateSpinner.getValue();
+        boolean important = importantCheckBox.isSelected();
+        NotePadManager.getInstance().updateEntry(name, description, date, important);
     }//GEN-LAST:event_applyButtonActionPerformed
 
     private void prevButtonActionPerformed(ActionEvent evt) {//GEN-FIRST:event_prevButtonActionPerformed
-        // TODO add your handling code here:
         selectPreviousNotePad();
     }//GEN-LAST:event_prevButtonActionPerformed
 
     private void nextButtonActionPerformed(ActionEvent evt) {//GEN-FIRST:event_nextButtonActionPerformed
-        // TODO add your handling code here:
         selectNextNotePad();
     }//GEN-LAST:event_nextButtonActionPerformed
 
+    public void onNewMenuItemSelected() {
+        eventName.setText("");
+        descriptionTextArea.setText("");
+        dateSpinner.setValue(new Date(System.currentTimeMillis()));
+        importantCheckBox.setSelected(false);
+    }
+    
+    public void onSaveMenuItemSelected() {
+        String name = eventName.getText();
+        if (NotePadManager.getInstance().isNotePadExists(name)) {
+            JOptionPane.showMessageDialog(this, "Такая запись уже была. Нажмите применить"
+                    + " для обновления данных или введите другое имя", "Ошибка", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        String description = descriptionTextArea.getText();
+        Date date = (Date) dateSpinner.getValue();
+        boolean important = importantCheckBox.isSelected();
+        NotePadManager.getInstance().createNewEntry(name, description, date, important);
+    }
+    
     private void selectPreviousNotePad() {
         if (padIndex <= 0) return;
         padIndex--;
@@ -173,6 +197,7 @@ public class PadPanel extends JPanel {
     }
     
     private NotePad getNotePad() {
+        System.out.println(padIndex);
         return NotePadManager.getInstance().getNotepads().get(padIndex);
     }
     

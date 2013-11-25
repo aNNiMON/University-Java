@@ -58,9 +58,12 @@ public class NotePadManager {
                 pad.setDescription(desc);
                 pad.setDate(date);
                 pad.setImportant(important);
+                saveToCSV(FILENAME, notepads);
+                return;
             }
         }
-        saveToCSV(FILENAME, notepads);
+        // Не нашли что обновлять - добавляем
+        createNewEntry(name, desc, date, important);
     }
     
     private void saveToCSV(String filename, ArrayList<NotePad> list) {

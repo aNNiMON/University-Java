@@ -1,5 +1,6 @@
 package tse.lr4;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -54,6 +55,18 @@ public class NotePad {
         this.important = important;
     }
     
+    public static NotePad readFromCsvLine(String line) throws ParseException {
+        if (line.isEmpty()) throw new RuntimeException("Пустая строка");
+        String[] params = line.split(",");
+        if (params.length != 4) throw new RuntimeException("Неверное количество параметров");
+
+        String name = params[0];
+        String description = params[1];
+        Date data = new SimpleDateFormat(DATE_PATTERN).parse(params[2]);
+        boolean important = Boolean.parseBoolean(params[3]);
+        
+        return new NotePad(name, description, data, important);
+    }
     
     public String storeToCsvLine() {
         final char SEPARATOR = ',';

@@ -16,7 +16,7 @@ public class LoginWindow extends JFrame {
         setLocationByPlatform(true);
         setDefaultCloseOperation(HIDE_ON_CLOSE);
         
-        LoginPanel panel = new LoginPanel();
+        LoginPanel panel = new LoginPanel(this);
         panel.setPreferredSize(new Dimension(350, 230));
         add(panel);
         pack();

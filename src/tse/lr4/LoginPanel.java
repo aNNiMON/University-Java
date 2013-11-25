@@ -1,15 +1,15 @@
 package tse.lr4;
 
-import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-import javax.swing.SwingUtilities;
 import org.netbeans.lib.awtextra.AbsoluteConstraints;
 import org.netbeans.lib.awtextra.AbsoluteLayout;
 
@@ -25,10 +25,12 @@ public class LoginPanel extends JPanel {
     private final JPasswordField passwordTextField, confirmPasswordTextField;
     private final JButton loginButton, signupButton, cancelButton;
     
+    private JFrame parentFrame;
     private boolean state;
 
-    public LoginPanel() {
+    public LoginPanel(JFrame parent) {
         state = STATE_LOGIN;
+        parentFrame = parent;
         
         setLayout(new AbsoluteLayout());
 
@@ -61,20 +63,16 @@ public class LoginPanel extends JPanel {
             public void actionPerformed(ActionEvent evt) {
                 if (state == STATE_LOGIN) {
                     // Показываем форму регистрации
-                    loginLabel.setText("Пароль");
-                    passwordLabel.setText("Повторите пароль");
-                    loginTextField.setVisible(false);
                     confirmPasswordTextField.setVisible(true);
                     loginButton.setVisible(false);
+                    parentFrame.setTitle("Регистрация в системе");
                     state = STATE_SIGNUP;
                 } else {
                     // Завершаем регистрацию и переходим в режим авторизации
-                    loginLabel.setText("Логин");
-                    passwordLabel.setText("Пароль");
-                    loginTextField.setVisible(true);
-                    confirmPasswordTextField.setVisible(false);
-                    loginButton.setVisible(true);
-                    state = STATE_LOGIN;
+                    if (!checkSignUpCredentials()) {
+                        return;
+                    }
+                    backToAuth();
                 }
             }
         });
@@ -87,16 +85,10 @@ public class LoginPanel extends JPanel {
             public void actionPerformed(ActionEvent evt) {
                 if (state == STATE_SIGNUP) {
                     // Отменяем регистрацию
-                    loginLabel.setText("Логин");
-                    passwordLabel.setText("Пароль");
-                    loginTextField.setVisible(true);
-                    confirmPasswordTextField.setVisible(false);
-                    loginButton.setVisible(true);
-                    state = STATE_LOGIN;
+                    backToAuth();
                 } else {
                     // Закрываем окно
-                    Window window = SwingUtilities.getWindowAncestor(LoginPanel.this);
-                    window.setVisible(false);
+                    parentFrame.setVisible(false);
                 }
             }
         });
@@ -104,6 +96,37 @@ public class LoginPanel extends JPanel {
 
         confirmPasswordTextField = new JPasswordField();
         confirmPasswordTextField.setHorizontalAlignment(JTextField.CENTER);
-        add(confirmPasswordTextField, new AbsoluteConstraints(50, 40, 245, -1));
+        add(confirmPasswordTextField, new AbsoluteConstraints(50, 120, 245, -1));
+        confirmPasswordTextField.setVisible(false);
+    }
+
+    private void backToAuth() {
+        confirmPasswordTextField.setVisible(false);
+        loginButton.setVisible(true);
+        parentFrame.setTitle("Вход в систему");
+        state = STATE_LOGIN;
+    }
+    
+    private boolean checkSignUpCredentials() {
+        if (loginTextField.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Не введён логин", "Ошибка", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        String pass1 = String.valueOf( passwordTextField.getPassword() );
+        String pass2 = String.valueOf( confirmPasswordTextField.getPassword() );
+        if (!pass1.equals(pass2)) {
+            JOptionPane.showMessageDialog(this, "Пароли не совпадают", "Ошибка", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        if (pass1.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Не введён пароль", "Ошибка", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        if (pass1.length() < 4) {
+            JOptionPane.showMessageDialog(this, "Слишком короткий пароль", "Ошибка", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        JOptionPane.showMessageDialog(this, "Регистрация завершена");
+        return true;
     }
 }

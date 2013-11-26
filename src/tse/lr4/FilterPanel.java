@@ -112,7 +112,7 @@ public class FilterPanel extends javax.swing.JPanel {
     }//GEN-END:initComponents
 
     private void filterButtonActionPerformed(ActionEvent evt) {//GEN-FIRST:event_filterButtonActionPerformed
-        String keyword = searchTextField.getText();
+        String keyword = searchTextField.getText().toLowerCase();
         Date from = (Date) dateFromSpinner.getValue();
         Date to = (Date) dateToSpinner.getValue();
         if (from.after(to)) {
@@ -126,10 +126,10 @@ public class FilterPanel extends javax.swing.JPanel {
             boolean isFilterSuccess = false;
             if (!keyword.isEmpty()) {
                 // Фильтр по значению
-                if (notePad.getDescription().indexOf(keyword) >= 0) {
+                if (notePad.getDescription().toLowerCase().indexOf(keyword) >= 0) {
                     isFilterSuccess = true;
                 }
-                if (notePad.getName().indexOf(keyword) >= 0) {
+                if (notePad.getName().toLowerCase().indexOf(keyword) >= 0) {
                     isFilterSuccess = true;
                 }
             }

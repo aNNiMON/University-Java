@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -106,7 +107,11 @@ public class DailyPad extends JFrame {
     private final ActionListener filterActionListener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-            
+            JDialog dialog = new JDialog(DailyPad.this);
+            FilterPanel panel = new FilterPanel();
+            dialog.add(panel);
+            dialog.pack();
+            dialog.setVisible(true);
         }
     };
 }

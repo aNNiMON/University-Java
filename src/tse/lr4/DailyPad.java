@@ -10,6 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JToolBar;
 import javax.swing.UIManager;
 
@@ -63,7 +64,9 @@ public class DailyPad extends JFrame {
         mainMenu.add(editMenu);
 
         JMenu helpMenu = new JMenu("Help");
-        helpMenu.add(new JMenuItem("About"));
+        JMenuItem aboutMenuItem = new JMenuItem("About");
+        aboutMenuItem.addActionListener(aboutActionListener);
+        helpMenu.add(aboutMenuItem);
         mainMenu.add(helpMenu);
         
         setJMenuBar(mainMenu);
@@ -101,6 +104,13 @@ public class DailyPad extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             setVisible(false);
+        }
+    };
+    
+    private final ActionListener aboutActionListener = new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            JOptionPane.showMessageDialog(DailyPad.this, "<html><b>Лабораторная работа №4</b><br/><i>Автор</i>: Виктор aNNiMON Мельник</html>");
         }
     };
     

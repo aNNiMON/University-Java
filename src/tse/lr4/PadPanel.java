@@ -1,8 +1,6 @@
-/*
- */
-
 package tse.lr4;
 
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -55,6 +53,7 @@ public class PadPanel extends JPanel {
         descriptionLabel.setText("Описание:");
 
         descriptionTextArea.setColumns(20);
+        descriptionTextArea.setFont(new Font("Tahoma", 0, 11)); // NOI18N
         descriptionTextArea.setRows(5);
         jScrollPane1.setViewportView(descriptionTextArea);
 
@@ -197,7 +196,6 @@ public class PadPanel extends JPanel {
     }
     
     private NotePad getNotePad() {
-        System.out.println(padIndex);
         return NotePadManager.getInstance().getNotepads().get(padIndex);
     }
     

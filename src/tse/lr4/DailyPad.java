@@ -53,6 +53,13 @@ public class DailyPad extends JFrame {
         exitMenuItem.addActionListener(exitActionListener);
         fileMenu.add(exitMenuItem);
         mainMenu.add(fileMenu);
+        
+        JMenu editMenu = new JMenu("Edit");
+        JMenuItem filterMenuItem = new JMenuItem("Filter");
+        filterMenuItem.setMnemonic(KeyEvent.VK_F);
+        filterMenuItem.addActionListener(filterActionListener);
+        editMenu.add(filterMenuItem);
+        mainMenu.add(editMenu);
 
         JMenu helpMenu = new JMenu("Help");
         helpMenu.add(new JMenuItem("About"));
@@ -93,6 +100,13 @@ public class DailyPad extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             setVisible(false);
+        }
+    };
+    
+    private final ActionListener filterActionListener = new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            
         }
     };
 }

@@ -66,7 +66,7 @@ public class TrianglesWindow extends JFrame {
         try {
             csvReader.readCsv();
         } catch (IOException ex) {
-            ex.printStackTrace();
+            Util.handleException(ex);
         } 
     }
     

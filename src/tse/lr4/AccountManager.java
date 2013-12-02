@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import tse.Util;
 
 /**
  * Менеджер аккаунтов.
@@ -67,7 +68,7 @@ public class AccountManager {
             oos.close();
             fos.close();
         } catch (IOException ex) {
-            ex.printStackTrace();
+            Util.handleException(ex);
         }
     }
     
@@ -80,7 +81,7 @@ public class AccountManager {
             ois.close();
             fis.close();
         } catch (IOException | ClassNotFoundException ex) {
-            ex.printStackTrace();
+            Util.handleException(ex);
         }
         return object;
     }

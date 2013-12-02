@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+import tse.Util;
 
 /**
  * Чтение CSV файла.
@@ -63,7 +64,7 @@ public class CsvReader<T> {
                     obj = (T) handler.createObject(params);
                 }
             } catch (RuntimeException ex) {
-                ex.printStackTrace();
+                Util.handleException(ex);
             }
             if (obj != null) list.add(obj);
         }
@@ -71,6 +72,4 @@ public class CsvReader<T> {
         handler.onFinishRead(file);
         return list;
     }
-    
-    
 }

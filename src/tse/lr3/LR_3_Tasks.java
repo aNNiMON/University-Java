@@ -13,6 +13,7 @@ import java.io.ObjectOutputStream;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.List;
+import tse.Util;
 
 /**
  *
@@ -79,7 +80,7 @@ public class LR_3_Tasks {
             printList(ellipses);
             System.out.println("Готово");
         } catch (IOException ex) {
-            ex.printStackTrace();
+            Util.handleException(ex);
         }
     }
     
@@ -106,7 +107,7 @@ public class LR_3_Tasks {
             oos.close();
             fos.close();
         } catch (IOException ex) {
-            ex.printStackTrace();
+            Util.handleException(ex);
         }
     }
     
@@ -119,7 +120,7 @@ public class LR_3_Tasks {
             ois.close();
             fis.close();
         } catch (IOException | ClassNotFoundException ex) {
-            ex.printStackTrace();
+            Util.handleException(ex);
         }
         return object;
     }

@@ -9,6 +9,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.nio.channels.FileChannel;
+import tse.Util;
 
 /**
  *
@@ -39,7 +40,7 @@ public class DirCopy extends AbstractFileChooser {
                     new OutputStreamWriter(new FileOutputStream(logFile, true), "UTF-8")
             );
         } catch (IOException ex) {
-            ex.printStackTrace();
+            Util.handleException(ex);
         }
     }
 
@@ -56,7 +57,7 @@ public class DirCopy extends AbstractFileChooser {
                     copyFile(file, dirDest);
                     writeLog(file.getAbsolutePath());
                 } catch (IOException ex) {
-                    ex.printStackTrace();
+                    Util.handleException(ex);
                 }
             }
         } else writeLog("Нечего копировать из " + dirSource.getAbsolutePath());
@@ -97,7 +98,9 @@ public class DirCopy extends AbstractFileChooser {
         try {
             writer.write(filename);
             writer.newLine();
-        } catch (IOException ex) { }
+        } catch (IOException ex) {
+            Util.handleException(ex);
+        }
     }
     
     private final FileFilter lastModifiedFilter = new FileFilter() {

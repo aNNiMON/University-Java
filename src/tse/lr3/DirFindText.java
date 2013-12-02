@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import tse.Util;
 
 /**
  *
@@ -43,7 +44,7 @@ public class DirFindText extends AbstractFileChooser {
                     new OutputStreamWriter(new FileOutputStream(logFile, true), "UTF-8")
             );
         } catch (IOException ex) {
-            ex.printStackTrace();
+            Util.handleException(ex);
         }
     }
 
@@ -69,7 +70,9 @@ public class DirFindText extends AbstractFileChooser {
                 // Ищем строку в файле
                 try {
                     findString(file, SEARCH_TEXT);
-                } catch (IOException ex) {}
+                } catch (IOException ex) {
+                    Util.handleException(ex);
+                }
             }
         }
     }
@@ -105,7 +108,9 @@ public class DirFindText extends AbstractFileChooser {
         try {
             writer.write(filename);
             writer.newLine();
-        } catch (IOException ex) { }
+        } catch (IOException ex) {
+            Util.handleException(ex);
+        }
     }
 
     private class FindInfo {

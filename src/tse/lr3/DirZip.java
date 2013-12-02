@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 import java.util.zip.ZipOutputStream;
+import tse.Util;
 
 /**
  *
@@ -48,7 +49,7 @@ public class DirZip extends AbstractFileChooser {
                 zos.close();
             }
         } catch (IOException ex) {
-            ex.printStackTrace();
+            Util.handleException(ex);
         }
         System.out.println("Готово!");
     }

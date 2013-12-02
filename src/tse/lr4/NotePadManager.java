@@ -11,6 +11,7 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import tse.Util;
 
 /**
  * Менеджер записей ежедневника.
@@ -79,7 +80,7 @@ public class NotePadManager {
             writer.flush();
             writer.close();
         } catch (IOException ex) {
-            ex.printStackTrace();
+            Util.handleException(ex);
         }
     }
     
@@ -103,7 +104,7 @@ public class NotePadManager {
             reader.close();
             return list;
         } catch (IOException ex) {
-            ex.printStackTrace();
+            Util.handleException(ex);
         }
         return null;
     }

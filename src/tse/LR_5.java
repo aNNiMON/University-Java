@@ -1,5 +1,6 @@
 package tse;
 
+import tse.lr5.FileIconsWindow;
 import tse.lr5.TrianglesWindow;
 
 
@@ -20,7 +21,7 @@ public class LR_5 implements ILabRab {
                 new TrianglesWindow().execute();
                 break;
             case 1:
-                // new DailyPad().setVisible(true);
+                new FileIconsWindow().execute();
                 break;
         }
     }

@@ -21,7 +21,7 @@ public class CsvReader<T> {
         
         T createObject(String[] params);
         
-        void onFinishRead();
+        void onFinishRead(File file);
     }
     
     private final File file;
@@ -68,7 +68,7 @@ public class CsvReader<T> {
             if (obj != null) list.add(obj);
         }
         reader.close();
-        handler.onFinishRead();
+        handler.onFinishRead(file);
         return list;
     }
     

@@ -27,6 +27,11 @@ public class FileIconsWindow extends JFrame {
     public void execute() {
         setVisible(true);
         
+        // Добавляем элемент которым будем управлять.
+        FileIconPaintable controllable = new FileIconPaintable(1.8, new Color(0x0E7405), true);
+        controllable.setLocation(10, HEIGHT - 80);
+        panel.addPaintable(controllable);
+        
         Random rnd = new Random();
         final int size = 8;
         for (int i = 0; i < size; i++) {

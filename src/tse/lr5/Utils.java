@@ -1,5 +1,6 @@
 package tse.lr5;
 
+import java.awt.Point;
 import java.io.File;
 import java.io.FilenameFilter;
 
@@ -17,5 +18,11 @@ public class Utils {
                 return name.toLowerCase().endsWith(extension);
             }
         });
+    }
+    
+    public static Point readPoint(String s1, String s2) {
+        int x = Integer.parseInt(s1);
+        int y = Integer.parseInt(s2);
+        return new Point(x, y);
     }
 }

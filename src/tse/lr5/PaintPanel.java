@@ -38,8 +38,10 @@ public class PaintPanel extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        for (PaintableObject paintable : paintables) {
-            paintable.draw(g);
+        synchronized (paintables) {
+            for (PaintableObject paintable : paintables) {
+                paintable.draw(g);
+            }
         }
     }
 }

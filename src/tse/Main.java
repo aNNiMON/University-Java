@@ -45,7 +45,7 @@ public class Main extends JFrame {
     
     private final ILabRab[] labs = new ILabRab[] {
         new LR_1(), new LR_2(), new LR_3(),
-        new LR_4(), new LR_5()
+        new LR_4(), new LR_5(), new Tools()
     };
     
     private JButton executeButton;

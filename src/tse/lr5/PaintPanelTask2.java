@@ -1,6 +1,7 @@
 package tse.lr5;
 
-import java.awt.Graphics;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
@@ -14,6 +15,7 @@ public class PaintPanelTask2 extends PaintPanel implements Runnable {
     
     public PaintPanelTask2(int width, int height) {
         super(width, height);
+        setFocusable(true);
         addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent evt) {
@@ -26,15 +28,31 @@ public class PaintPanelTask2 extends PaintPanel implements Runnable {
                 getControllablePaintable().setLocation(evt.getX(), evt.getY());
             }
         });
+        addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyReleased(KeyEvent e) {
+                final int step = 5;
+                FileIconPaintable p1 = getControllablePaintable();
+                switch (e.getKeyCode()) {
+                    case KeyEvent.VK_UP:
+                        p1.move(0, -step);
+                        break;
+                    case KeyEvent.VK_DOWN:
+                        p1.move(0, step);
+                        break;
+                    case KeyEvent.VK_LEFT:
+                        p1.move(-step, 0);
+                        break;
+                    case KeyEvent.VK_RIGHT:
+                        p1.move(step, 0);
+                        break;
+                }
+            }
+        });
     }
     
     public void startRepainterThread() {
         new Thread(this).start();
-    }
-    
-    @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
     }
 
     @Override

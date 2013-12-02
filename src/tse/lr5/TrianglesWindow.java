@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.IOException;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import tse.Util;
 
 /**
  * @author aNNiMON
@@ -25,7 +26,7 @@ public class TrianglesWindow extends JFrame {
     }
     
     public void execute() {
-        File[] csvFiles = Utils.readFiles("lr5", ".csv");
+        File[] csvFiles = Util.readFiles("lr5", ".csv");
         if (csvFiles == null) {
             JOptionPane.showMessageDialog(this, "CSV-файлов не обнаружено! Сворачиваемся, ребята",
                     "Ошибка", JOptionPane.ERROR_MESSAGE);
@@ -66,7 +67,7 @@ public class TrianglesWindow extends JFrame {
             csvReader.readCsv();
         } catch (IOException ex) {
             ex.printStackTrace();
-        }
+        } 
     }
     
     private final CsvReader.ReaderHandler<TrianglePaintable> trianglesHandler
@@ -83,9 +84,9 @@ public class TrianglesWindow extends JFrame {
             
             Color fill = Color.decode(params[0]);
             Color stroke = Color.decode(params[1]);
-            Point p1 = Utils.readPoint(params[2], params[3]);
-            Point p2 = Utils.readPoint(params[4], params[5]);
-            Point p3 = Utils.readPoint(params[6], params[7]);
+            Point p1 = Util.readPoint(params[2], params[3]);
+            Point p2 = Util.readPoint(params[4], params[5]);
+            Point p3 = Util.readPoint(params[6], params[7]);
             TrianglePaintable obj = new TrianglePaintable(fill, stroke, p1, p2, p3);
             panel.addPaintable(obj);
             try {

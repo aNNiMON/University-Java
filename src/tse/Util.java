@@ -1,7 +1,10 @@
 package tse;
 
 import java.awt.Image;
+import java.awt.Point;
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -86,6 +89,23 @@ public class Util {
             e.printStackTrace();
         }
         return "";
+    }
+    
+    public static File[] readFiles(String path, final String extension) {
+        File dir = new File(path);
+        return dir.listFiles(new FilenameFilter() {
+
+            @Override
+            public boolean accept(File dir, String name) {
+                return name.toLowerCase().endsWith(extension);
+            }
+        });
+    }
+    
+    public static Point readPoint(String s1, String s2) {
+        int x = Integer.parseInt(s1);
+        int y = Integer.parseInt(s2);
+        return new Point(x, y);
     }
     
     private static InputStream getInputStream(String resource) {

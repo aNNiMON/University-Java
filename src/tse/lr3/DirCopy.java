@@ -1,5 +1,6 @@
 package tse.lr3;
 
+import com.annimon.ui.AbstractFileChooser;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileFilter;
@@ -13,7 +14,7 @@ import java.nio.channels.FileChannel;
  *
  * @author aNNiMON
  */
-public class DirCopy extends AbstractDirectoryChooser {
+public class DirCopy extends AbstractFileChooser {
     
     private static final int DAYS = 3;
 
@@ -43,7 +44,7 @@ public class DirCopy extends AbstractDirectoryChooser {
     }
 
     @Override
-    protected void directorySelected(File directory) {
+    protected void onFileSelected(File directory) {
         dirSource = directory;
         
         dirDest.mkdirs();
@@ -66,6 +67,7 @@ public class DirCopy extends AbstractDirectoryChooser {
                 writer.close();
             } catch (IOException ex) {}
         }
+        System.out.println("Готово!");
     }
     
     private void copyFile(File sourceFile, File destDirectory) throws IOException {

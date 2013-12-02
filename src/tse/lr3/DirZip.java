@@ -1,5 +1,6 @@
 package tse.lr3;
 
+import com.annimon.ui.AbstractFileChooser;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -12,7 +13,7 @@ import java.util.zip.ZipOutputStream;
  *
  * @author aNNiMON
  */
-public class DirZip extends AbstractDirectoryChooser {
+public class DirZip extends AbstractFileChooser {
     
     private static final boolean EXTRACT = false;
     
@@ -32,7 +33,7 @@ public class DirZip extends AbstractDirectoryChooser {
     }
 
     @Override
-    protected void directorySelected(File directory) {
+    protected void onFileSelected(File directory) {
         try {
             if (EXTRACT) {
                 FileInputStream fis = new FileInputStream(zipFile);
@@ -49,6 +50,7 @@ public class DirZip extends AbstractDirectoryChooser {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
+        System.out.println("Готово!");
     }
     
     private void unzipDirectory(ZipInputStream zis, File directory) throws IOException {

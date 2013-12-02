@@ -1,5 +1,6 @@
 package tse.lr3;
 
+import com.annimon.ui.AbstractFileChooser;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -17,7 +18,7 @@ import java.util.List;
  *
  * @author aNNiMON
  */
-public class DirFindText extends AbstractDirectoryChooser {
+public class DirFindText extends AbstractFileChooser {
     
     private static final String SEARCH_TEXT = "class";
     
@@ -47,7 +48,7 @@ public class DirFindText extends AbstractDirectoryChooser {
     }
 
     @Override
-    protected void directorySelected(File directory) {
+    protected void onFileSelected(File directory) {
         scanFiles(directory);
         writeFindInfo(findInfos);
         if (writer != null) {
@@ -56,6 +57,7 @@ public class DirFindText extends AbstractDirectoryChooser {
                 writer.close();
             } catch (IOException ex) {}
         }
+        System.out.println("Готово!");
     }
     
     private void scanFiles(File dir) {

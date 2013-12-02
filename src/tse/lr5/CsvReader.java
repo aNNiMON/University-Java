@@ -36,15 +36,15 @@ public class CsvReader<T> {
         this.handler = handler;
     }
     
-    public List<T> readCsv() throws IOException {
-        return readCsv(true);
+    public List<T> readCsvToList() throws IOException {
+        return readCsvToList(true);
     }
     
-    public List<T> readCsv(boolean skipHeaderLine) throws IOException {
-        return readCsv(skipHeaderLine, ",");
+    public List<T> readCsvToList(boolean skipHeaderLine) throws IOException {
+        return readCsvToList(skipHeaderLine, ",");
     }
     
-    public List<T> readCsv(boolean skipHeaderLine, String separator) throws IOException {
+    public List<T> readCsvToList(boolean skipHeaderLine, String separator) throws IOException {
         if (handler == null) throw new RuntimeException("Не установлен ReaderHandler");
         
         handler.onStartRead(file);
@@ -71,5 +71,31 @@ public class CsvReader<T> {
         reader.close();
         handler.onFinishRead(file);
         return list;
+    }
+    
+    public void readCsv(boolean skipHeaderLine, String separator) throws IOException {
+        if (handler == null) throw new RuntimeException("Не установлен ReaderHandler");
+        
+        handler.onStartRead(file);
+        BufferedReader reader = new BufferedReader(
+                new InputStreamReader( new FileInputStream(file), "UTF-8" )
+        );
+        if (skipHeaderLine) {
+            reader.readLine();
+        }
+        String line;
+        while ( (line = reader.readLine()) != null ) {
+            T obj = null;
+            try {
+                if (!line.isEmpty()) {
+                    String[] params = line.split(separator);
+                    obj = (T) handler.createObject(params);
+                }
+            } catch (RuntimeException ex) {
+                Util.handleException(ex);
+            }
+        }
+        reader.close();
+        handler.onFinishRead(file);
     }
 }

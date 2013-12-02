@@ -10,8 +10,8 @@ import java.awt.Polygon;
  */
 public class TrianglePaintable implements PaintableObject {
     
-    private Polygon triangle;
-    private Color fillColor, strokeColor;
+    private final Polygon triangle;
+    private final Color fillColor, strokeColor;
     
     public TrianglePaintable(Color fillColor, Color strokeColor, Point p1, Point p2, Point p3) {
         this.fillColor = fillColor;

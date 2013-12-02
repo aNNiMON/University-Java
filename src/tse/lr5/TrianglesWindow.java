@@ -17,17 +17,18 @@ public class TrianglesWindow extends JFrame {
 
     public TrianglesWindow() {
         super("Треугольники");
+        setAlwaysOnTop(true);
         setLocationByPlatform(true);
         setDefaultCloseOperation(HIDE_ON_CLOSE);
         
-        panel = new PaintPanel(600, 400);
+        panel = new PaintPanel(600, 450);
         add(panel);
         pack();
     }
     
     public void execute() {
         File[] csvFiles = Util.readFiles("lr5", ".csv");
-        if (csvFiles == null) {
+        if (csvFiles == null || csvFiles.length == 0) {
             JOptionPane.showMessageDialog(this, "CSV-файлов не обнаружено! Сворачиваемся, ребята",
                     "Ошибка", JOptionPane.ERROR_MESSAGE);
             return;
@@ -64,7 +65,7 @@ public class TrianglesWindow extends JFrame {
         CsvReader<TrianglePaintable> csvReader = new CsvReader<>(file);
         csvReader.setReaderHandler(trianglesHandler);
         try {
-            csvReader.readCsv();
+            csvReader.readCsv(false, ",");
         } catch (IOException ex) {
             Util.handleException(ex);
         } 
@@ -90,7 +91,7 @@ public class TrianglesWindow extends JFrame {
             TrianglePaintable obj = new TrianglePaintable(fill, stroke, p1, p2, p3);
             panel.addPaintable(obj);
             try {
-                Thread.sleep(500);
+                Thread.sleep(10);
             } catch (InterruptedException ex) { }
             return obj;
         }

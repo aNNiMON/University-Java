@@ -1,5 +1,7 @@
 package tse;
 
+import tse.lr5.TrianglesWindow;
+
 
 /**
  * @author aNNiMON
@@ -7,7 +9,7 @@ package tse;
 public class LR_5 implements ILabRab {
     
     private static final String[] TITLES = {
-        "Чтение объектов из CSV и рисование их на экране",
+        "Чтение и рисование объектов из CSV",
         "Движущиеся объекты и их управление"
     };
 
@@ -15,7 +17,7 @@ public class LR_5 implements ILabRab {
     public void execute(int index) {
         switch(index) {
             case 0:
-                // new LoginWindow().setVisible(true);
+                new TrianglesWindow().execute();
                 break;
             case 1:
                 // new DailyPad().setVisible(true);

@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Scanner;
 import javax.imageio.ImageIO;
 
@@ -66,6 +68,24 @@ public class Util {
     
     public static void handleException(Exception ex) {
         if (DEBUG) ex.printStackTrace();
+    }
+    
+    public static String md5(String s) {
+        try {
+            MessageDigest digest = java.security.MessageDigest.getInstance("MD5");
+            digest.update(s.getBytes());
+            byte[] messageDigest = digest.digest();
+
+            StringBuilder hexString = new StringBuilder();
+            for (int i = 0; i < messageDigest.length; i++) {
+                hexString.append(Integer.toHexString(0xFF & messageDigest[i]));
+            }
+            return hexString.toString();
+
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        return "";
     }
     
     private static InputStream getInputStream(String resource) {

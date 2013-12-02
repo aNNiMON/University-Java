@@ -12,6 +12,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import org.netbeans.lib.awtextra.AbsoluteConstraints;
 import org.netbeans.lib.awtextra.AbsoluteLayout;
+import tse.Util;
 
 /**
  * Панель авторизации.
@@ -147,7 +148,7 @@ public class LoginPanel extends JPanel {
     }
     
     private void registerNewAccount(String user, String pass) {
-        String md5hash = Utils.md5(pass);
+        String md5hash = Util.md5(pass);
         AccountManager.getInstance().createNewAccount(user, md5hash);
     }
     
@@ -163,7 +164,7 @@ public class LoginPanel extends JPanel {
             return;
         }
         
-        String md5hash = Utils.md5(pass);
+        String md5hash = Util.md5(pass);
         switch(AccountManager.getInstance().checkAuth(login, md5hash)) {
             case AccountManager.STATE_ACCOUNT_NOT_EXISTS:
                 JOptionPane.showMessageDialog(this, "Пользователя с таким именем не существует", "Ошибка", JOptionPane.ERROR_MESSAGE);

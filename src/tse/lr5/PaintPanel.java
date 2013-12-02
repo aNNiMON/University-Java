@@ -15,7 +15,7 @@ import javax.swing.SwingUtilities;
  */
 public class PaintPanel extends JPanel {
     
-    private final List<PaintableObject> paintables;
+    protected final List<PaintableObject> paintables;
     
     public PaintPanel(int width, int height) {
         paintables = Collections.synchronizedList(new ArrayList<PaintableObject>());

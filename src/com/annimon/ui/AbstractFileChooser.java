@@ -1,4 +1,4 @@
-package tse.lr3;
+package com.annimon.ui;
 
 import java.awt.Component;
 import java.awt.Dimension;
@@ -15,25 +15,29 @@ import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
  *
  * @author aNNiMON
  */
-public abstract class AbstractDirectoryChooser extends JDialog implements ActionListener {
+public abstract class AbstractFileChooser extends JDialog implements ActionListener {
 
     private final JFileChooser chooser;
+    
+    public AbstractFileChooser(String title) {
+        this(title, "Выбрать директорию", JFileChooser.DIRECTORIES_ONLY);
+    }
 
-    public AbstractDirectoryChooser(String title) {
+    public AbstractFileChooser(String title, String buttonText, int mode) {
         setTitle(title);
         setPreferredSize(new Dimension(200, 80));
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        initWindow();
+        initWindow(buttonText);
         chooser = new JFileChooser();
         chooser.setCurrentDirectory(new File("."));
-        chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        chooser.setFileSelectionMode(mode);
         chooser.setAcceptAllFileFilterUsed(false);
     }
     
-    private void initWindow() {
+    private void initWindow(String buttonText) {
         JPanel panel = new JPanel();
         
-        JButton button = new JButton("Выбрать директорию");
+        JButton button = new JButton(buttonText);
         button.setPreferredSize(new Dimension(150, 40));
         button.setAlignmentX(Component.CENTER_ALIGNMENT);
         button.addActionListener(this);
@@ -51,8 +55,7 @@ public abstract class AbstractDirectoryChooser extends JDialog implements Action
 
                 @Override
                 public void run() {
-                    directorySelected(chooser.getSelectedFile());
-                    System.out.println("Готово!");
+                    onFileSelected(chooser.getSelectedFile());
                 }
             }).start();
         } else {
@@ -60,5 +63,5 @@ public abstract class AbstractDirectoryChooser extends JDialog implements Action
         }
     }
     
-    protected abstract void directorySelected(File directory);
+    protected abstract void onFileSelected(File file);
 }

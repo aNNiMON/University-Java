@@ -1,6 +1,9 @@
 package tse.lr5;
 
 import java.awt.Graphics;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
 import tse.Util;
 
 /**
@@ -11,6 +14,18 @@ public class PaintPanelTask2 extends PaintPanel implements Runnable {
     
     public PaintPanelTask2(int width, int height) {
         super(width, height);
+        addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent evt) {
+                getControllablePaintable().setLocation(evt.getX(), evt.getY());
+            }
+        });
+        addMouseMotionListener(new MouseMotionAdapter() {
+            @Override
+            public void mouseDragged(MouseEvent evt) {
+                getControllablePaintable().setLocation(evt.getX(), evt.getY());
+            }
+        });
     }
     
     public void startRepainterThread() {
@@ -49,5 +64,9 @@ public class PaintPanelTask2 extends PaintPanel implements Runnable {
                 return;
             }
         }
+    }
+    
+    private synchronized FileIconPaintable getControllablePaintable() {
+        return (FileIconPaintable) paintables.iterator().next();
     }
 }

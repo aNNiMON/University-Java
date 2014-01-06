@@ -85,11 +85,10 @@ public class CsvReader<T> {
         }
         String line;
         while ( (line = reader.readLine()) != null ) {
-            T obj = null;
             try {
                 if (!line.isEmpty()) {
                     String[] params = line.split(separator);
-                    obj = (T) handler.createObject(params);
+                    handler.createObject(params);
                 }
             } catch (RuntimeException ex) {
                 Util.handleException(ex);

@@ -60,14 +60,17 @@ public class NotePad {
         return getName() + ". " + getDescription();
     }
     
-    public static NotePad readFromCsvLine(String line) throws ParseException {
-        if (line.isEmpty()) throw new RuntimeException("Пустая строка");
-        String[] params = line.split("\t");
+    public static NotePad readFromCsvLine(String[] params) {
         if (params.length != 4) throw new RuntimeException("Неверное количество параметров");
 
         String name = params[0];
         String description = params[1];
-        Date data = new SimpleDateFormat(DATE_PATTERN).parse(params[2]);
+        Date data;
+        try {
+            data = new SimpleDateFormat(DATE_PATTERN).parse(params[2]);
+        } catch (ParseException ex) {
+            data = new Date(System.currentTimeMillis());
+        }
         boolean important = Boolean.parseBoolean(params[3]);
         
         return new NotePad(name, description, data, important);

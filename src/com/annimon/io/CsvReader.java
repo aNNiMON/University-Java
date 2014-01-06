@@ -1,4 +1,4 @@
-package tse.lr5;
+package com.annimon.io;
 
 import java.io.BufferedReader;
 import java.io.File;

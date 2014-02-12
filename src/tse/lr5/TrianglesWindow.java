@@ -14,7 +14,7 @@ import tse.Util;
 public class TrianglesWindow extends JFrame {
     
     private final PaintPanel panel;
-
+    
     public TrianglesWindow() {
         super("Треугольники");
         setAlwaysOnTop(true);
@@ -91,7 +91,7 @@ public class TrianglesWindow extends JFrame {
             TrianglePaintable obj = new TrianglePaintable(fill, stroke, p1, p2, p3);
             panel.addPaintable(obj);
             try {
-                Thread.sleep(10);
+                Thread.sleep(5);
             } catch (InterruptedException ex) { }
             return obj;
         }

@@ -30,7 +30,7 @@ public class PaintPanelTask2 extends PaintPanel implements Runnable {
         });
         addKeyListener(new KeyAdapter() {
             @Override
-            public void keyReleased(KeyEvent e) {
+            public void keyPressed(KeyEvent e) {
                 final int step = 5;
                 FileIconPaintable p1 = getControllablePaintable();
                 switch (e.getKeyCode()) {

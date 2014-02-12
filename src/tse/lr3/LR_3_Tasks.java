@@ -1,13 +1,13 @@
 package tse.lr3;
 
+import com.annimon.io.CsvReader;
 import tse.lr2.*;
 import java.awt.Point;
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStreamWriter;
@@ -151,31 +151,25 @@ public class LR_3_Tasks {
     }
     
     private List<Ellipse> readFromCSV(String filename) throws IOException {
-        List<Ellipse> list = new ArrayList<>();
-        BufferedReader reader = new BufferedReader(
-                new InputStreamReader( new FileInputStream(filename), "UTF-8" )
-        );
-        reader.readLine(); // Класс,X1,Y1,X2,Y2,X3,Y3,X4,Y4
-        String line;
-        while ( (line = reader.readLine()) != null ) {
-            Ellipse ellipse = null;
-            try {
-                ellipse = readFromCsvLine(line);
-            } catch (RuntimeException ex) {
-                System.out.println(ex.toString());
+        CsvReader<Ellipse> csvReader = new CsvReader<>(new File(filename));
+        csvReader.setReaderHandler(new CsvReader.ReaderHandler<Ellipse>() {
+
+            @Override
+            public void onStartRead(File file) { }
+
+            @Override
+            public Ellipse createObject(String[] params) {
+                return readFromCsvLine(params);
             }
-            if (ellipse != null) list.add(ellipse);
-        }
-        reader.close();
-        return list;
+
+            @Override
+            public void onFinishRead(File file) { }
+        });
+        return csvReader.readCsvToList(true);
     }
     
-    private Ellipse readFromCsvLine(String line) {
+    private Ellipse readFromCsvLine(String[] params) {
         final int POINTS_COUNT = 4;
-        if (line.isEmpty()) throw new RuntimeException("Пустая строка");
-        String[] params = line.split(",");
-        if (params.length < 9) throw new RuntimeException("Неверное количество параметров");
-        
         final int[] coords = new int[POINTS_COUNT * 2];
         for (int i = 0; i < coords.length; i++) {
             coords[i] = Integer.parseInt(params[i + 1]);

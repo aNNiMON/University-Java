@@ -9,7 +9,6 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JPanel;
-import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 
 /**
  *

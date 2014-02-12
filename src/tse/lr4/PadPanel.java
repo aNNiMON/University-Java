@@ -3,9 +3,9 @@ package tse.lr4;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -199,7 +199,7 @@ public class PadPanel extends JPanel {
         return NotePadManager.getInstance().getNotepads().get(padIndex);
     }
     
-    private ArrayList<NotePad> getNotepads() {
+    private List<NotePad> getNotepads() {
         return NotePadManager.getInstance().getNotepads();
     }
 

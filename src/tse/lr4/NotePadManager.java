@@ -1,13 +1,11 @@
 package tse.lr4;
 
-import java.io.BufferedReader;
+import com.annimon.io.CsvReader;
 import java.io.BufferedWriter;
-import java.io.FileInputStream;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -30,14 +28,14 @@ public class NotePadManager {
         return instance;
     }
 
-    private ArrayList<NotePad> notepads;
+    private List<NotePad> notepads;
     
     public NotePadManager() {
-        notepads = (ArrayList<NotePad>) readFromCSV(FILENAME);
+        notepads = readFromCSV(FILENAME);
         if (notepads == null) notepads = new ArrayList<>();
     }
     
-    public ArrayList<NotePad> getNotepads() {
+    public List<NotePad> getNotepads() {
         return notepads;
     }
     
@@ -67,7 +65,7 @@ public class NotePadManager {
         createNewEntry(name, desc, date, important);
     }
     
-    private void saveToCSV(String filename, ArrayList<NotePad> list) {
+    private void saveToCSV(String filename, List<NotePad> list) {
         try {
             BufferedWriter writer = new BufferedWriter(
                     new OutputStreamWriter(new FileOutputStream(filename), "UTF-8")
@@ -84,25 +82,23 @@ public class NotePadManager {
         }
     }
     
-    private Object readFromCSV(String filename) {
-        try {
-            List<NotePad> list = new ArrayList<>();
-            BufferedReader reader = new BufferedReader(
-                new InputStreamReader( new FileInputStream(filename), "UTF-8" )
-            );
-            reader.readLine(); // Имя,Описание,Дата,Важное
-            String line;
-            while ( (line = reader.readLine()) != null ) {
-                NotePad pad = null;
-                try {
-                    pad = NotePad.readFromCsvLine(line);
-                } catch (RuntimeException | ParseException ex) {
-                    System.out.println(ex.toString());
-                }
-                if (pad != null) list.add(pad);
+    private List<NotePad> readFromCSV(String filename) {
+        CsvReader<NotePad> csvReader = new CsvReader<>(new File(filename));
+        csvReader.setReaderHandler(new CsvReader.ReaderHandler<NotePad>() {
+
+            @Override
+            public void onStartRead(File file) { }
+
+            @Override
+            public NotePad createObject(String[] params) {
+                return NotePad.readFromCsvLine(params);
             }
-            reader.close();
-            return list;
+
+            @Override
+            public void onFinishRead(File file) { }
+        });
+        try {
+            return csvReader.readCsvToList();
         } catch (IOException ex) {
             Util.handleException(ex);
         }
